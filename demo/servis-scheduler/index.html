@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html lang="bg">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta name="robots" content="noindex, nofollow" />
+<title>Демо · График 3D Стенд</title>
+<style>
+  :root {
+    --header: #1e293b;
+    --header2: #334155;
+    --blue: #2563eb;
+    --blue-dark: #1d4ed8;
+    --green: #16a34a;
+    --green-bg: #f0fdf4;
+    --green-border: #bbf7d0;
+    --red: #dc2626;
+    --red-bg: #fef2f2;
+    --red-border: #fecaca;
+    --page-bg: #f1f5f9;
+    --text: #1e293b;
+    --text-muted: #64748b;
+    --border: #e2e8f0;
+    --accent: #d9a441;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Inter, Roboto, sans-serif;
+    background: var(--page-bg);
+    color: var(--text);
+    min-height: 100vh;
+  }
+
+  .demo-banner {
+    background: var(--accent);
+    color: #2a2000;
+    text-align: center;
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: 0.03em;
+    padding: 8px 12px;
+  }
+
+  main { max-width: 520px; margin: 0 auto; padding-bottom: 40px; }
+
+  .card-header {
+    background: var(--header);
+    color: #fff;
+    border-radius: 0 0 16px 16px;
+    padding: 16px 18px 18px;
+  }
+
+  .header-top { display: flex; align-items: center; gap: 12px; margin-bottom: 14px; }
+
+  .logo-placeholder {
+    width: 44px; height: 44px; border-radius: 10px;
+    background: rgba(255,255,255,0.08); border: 1.5px dashed rgba(255,255,255,0.35);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 17px; flex-shrink: 0;
+  }
+
+  .header-titles { flex: 1; min-width: 0; }
+  .header-titles .day-name { font-size: 19px; font-weight: 700; }
+  .header-titles .day-date { font-size: 12.5px; opacity: 0.65; margin-top: 1px; }
+
+  .filter-badges { display: flex; gap: 6px; }
+  .filter-badge {
+    width: 26px; height: 26px; border-radius: 50%; border: none; color: #fff;
+    font-size: 11.5px; font-weight: 700; cursor: pointer; opacity: 0.55;
+    transition: opacity 0.15s, transform 0.15s;
+  }
+  .filter-badge.active { opacity: 1; transform: scale(1.08); box-shadow: 0 0 0 2px rgba(255,255,255,0.5); }
+
+  .view-toggle { display: flex; gap: 8px; margin-bottom: 12px; }
+  .view-toggle button {
+    flex: 1; padding: 9px; border-radius: 9px; border: none; font-size: 13.5px; font-weight: 600;
+    background: rgba(255,255,255,0.08); color: rgba(255,255,255,0.75); cursor: pointer;
+    transition: background 0.15s, color 0.15s;
+  }
+  .view-toggle button.active { background: var(--blue); color: #fff; }
+
+  .legend { display: flex; align-items: center; gap: 16px; font-size: 12.5px; color: rgba(255,255,255,0.8); margin-bottom: 12px; }
+  .legend span { display: flex; align-items: center; gap: 5px; }
+  .legend .dot { width: 8px; height: 8px; border-radius: 50%; }
+  .dot.red { background: #f87171; }
+  .dot.green { background: #4ade80; }
+
+  .day-nav { display: flex; gap: 8px; }
+  .day-nav button {
+    border: none; border-radius: 9px; font-size: 13px; font-weight: 600; cursor: pointer;
+    padding: 9px 10px; background: var(--header2); color: rgba(255,255,255,0.85);
+    transition: background 0.15s;
+  }
+  .day-nav button:hover { background: #475569; }
+  .day-nav button.today-active { background: #4d6c5f; color: #fff; flex: 1.4; }
+  .day-nav button.side { flex: 1; }
+
+  .slots-wrap { padding: 18px 16px 0; }
+  .slots-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+
+  .slot {
+    border-radius: 10px; padding: 10px 12px; cursor: pointer; border: 1px solid;
+    transition: transform 0.12s, box-shadow 0.12s;
+  }
+  .slot:hover { transform: translateY(-1px); box-shadow: 0 4px 12px rgba(0,0,0,0.06); }
+  .slot.free { background: var(--green-bg); border-color: var(--green-border); }
+  .slot.taken { background: var(--red-bg); border-color: var(--red-border); cursor: default; }
+  .slot.taken:hover { transform: none; box-shadow: none; }
+  .slot .time { font-size: 14px; font-weight: 700; }
+  .slot.free .time { color: var(--text); }
+  .slot.taken .time { color: var(--text); }
+  .slot .status { font-size: 12px; margin-top: 2px; font-weight: 500; }
+  .slot.free .status { color: var(--green); }
+  .slot.taken .status { color: var(--red); }
+  .slot .taken-name { font-size: 11px; color: var(--text-muted); margin-top: 2px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+
+  .modal-overlay {
+    position: fixed; inset: 0; background: rgba(15,23,42,0.55);
+    display: none; align-items: center; justify-content: center; z-index: 60; padding: 20px;
+  }
+  .modal-overlay.show { display: flex; }
+  .modal {
+    background: #fff; border-radius: 14px; padding: 22px; max-width: 340px; width: 100%;
+    box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+  }
+  .modal h3 { font-size: 16px; margin-bottom: 4px; }
+  .modal .modal-sub { font-size: 12.5px; color: var(--text-muted); margin-bottom: 16px; }
+  .modal .field { margin-bottom: 12px; }
+  .modal .field label { font-size: 11.5px; font-weight: 600; color: var(--text-muted); display: block; margin-bottom: 4px; text-transform: uppercase; letter-spacing: 0.03em; }
+  .modal .field input {
+    width: 100%; border: 1px solid var(--border); border-radius: 8px; padding: 10px 11px; font-size: 14px;
+  }
+  .modal-actions { display: flex; gap: 8px; margin-top: 16px; }
+  .modal-actions button { flex: 1; border: none; border-radius: 8px; padding: 11px; font-size: 13.5px; font-weight: 600; cursor: pointer; }
+  .btn-confirm { background: var(--blue); color: #fff; }
+  .btn-confirm:hover { background: var(--blue-dark); }
+  .btn-cancel { background: #f1f5f9; color: var(--text); }
+  .modal-note { font-size: 10.5px; color: var(--text-muted); text-align: center; margin-top: 12px; }
+
+  .toast {
+    position: fixed; bottom: 24px; left: 50%; transform: translateX(-50%) translateY(20px);
+    background: var(--header); color: #fff; padding: 12px 22px; border-radius: 10px;
+    font-size: 13.5px; opacity: 0; pointer-events: none; transition: opacity 0.25s, transform 0.25s;
+    z-index: 50;
+  }
+  .toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
+</style>
+</head>
+<body>
+
+  <div class="demo-banner">🔒 ДЕМО ВЕРСИЯ — примерен график, без връзка към реален сервиз</div>
+
+  <main>
+    <div class="card-header">
+      <div class="header-top">
+        <div class="logo-placeholder">🖼️</div>
+        <div class="header-titles">
+          <div class="day-name" id="day-name">Четвъртък</div>
+          <div class="day-date" id="day-date">2 юли 2026</div>
+        </div>
+        <div class="filter-badges">
+          <button class="filter-badge active" style="background:#3b82f6;" title="Балансиране">Б</button>
+          <button class="filter-badge active" style="background:#ef4444;" title="Изправяне">И</button>
+          <button class="filter-badge active" style="background:#f59e0b;" title="Ъгли (3D)">А</button>
+          <button class="filter-badge active" style="background:#8b5cf6;" title="Ремонт">Р</button>
+        </div>
+      </div>
+
+      <div class="view-toggle">
+        <button class="active" id="view-day">Ден</button>
+        <button id="view-week" onclick="toast('Демо — седмичен изглед не е наличен в примера')">Седмица</button>
+      </div>
+
+      <div class="legend">
+        <span><span class="dot red"></span><span id="taken-count">0 заети</span></span>
+        <span><span class="dot green"></span><span id="free-count">18 свободни</span></span>
+      </div>
+
+      <div class="day-nav">
+        <button class="side" onclick="changeDay(-1)">‹ Предишен</button>
+        <button class="today-active" onclick="goToday()">Днес</button>
+        <button class="side" onclick="changeDay(1)">Следващ ›</button>
+      </div>
+    </div>
+
+    <div class="slots-wrap">
+      <div class="slots-grid" id="slots-grid"></div>
+    </div>
+  </main>
+
+  <div class="modal-overlay" id="modal-overlay">
+    <div class="modal">
+      <h3>Резервация на час</h3>
+      <div class="modal-sub" id="modal-time">08:00 · 3D Стенд</div>
+      <div class="field"><label>Име на клиент</label><input type="text" id="f-name" placeholder="Иван Петров"></div>
+      <div class="field"><label>Телефон</label><input type="text" id="f-phone" placeholder="+359 88 888 8888"></div>
+      <div class="field"><label>Марка / модел на автомобил</label><input type="text" id="f-car" placeholder="напр. VW Golf"></div>
+      <div class="modal-actions">
+        <button class="btn-cancel" onclick="closeModal()">Отказ</button>
+        <button class="btn-confirm" onclick="confirmBooking()">Запази часа</button>
+      </div>
+      <div class="modal-note">Демо — резервацията не се записва никъде</div>
+    </div>
+  </div>
+
+  <div class="toast" id="toast"></div>
+
+<script>
+  var days = [
+    { name: 'Сряда',     date: '1 юли 2026' },
+    { name: 'Четвъртък', date: '2 юли 2026' },
+    { name: 'Петък',     date: '3 юли 2026' },
+    { name: 'Събота',    date: '4 юли 2026' }
+  ];
+  var currentDayIdx = 1;
+
+  var times = [];
+  for (var h = 8; h <= 16; h++) {
+    times.push(h.toString().padStart(2,'0') + ':00');
+    times.push(h.toString().padStart(2,'0') + ':30');
+  }
+
+  var demoTaken = { '2 юли 2026': { '09:30': 'Георги Николов', '13:00': 'Петя Иванова', '14:30': 'ВВ Логистик ЕООД' } };
+
+  var slotState = {};
+
+  function loadDay(idx) {
+    currentDayIdx = idx;
+    var day = days[idx];
+    document.getElementById('day-name').textContent = day.name;
+    document.getElementById('day-date').textContent = day.date;
+
+    slotState = {};
+    var taken = demoTaken[day.date] || {};
+    times.forEach(function (t) {
+      slotState[t] = taken[t] ? { taken: true, name: taken[t] } : { taken: false };
+    });
+    renderSlots();
+  }
+
+  function renderSlots() {
+    var grid = document.getElementById('slots-grid');
+    grid.innerHTML = '';
+    var takenCount = 0;
+    times.forEach(function (t) {
+      var s = slotState[t];
+      if (s.taken) takenCount++;
+      var el = document.createElement('div');
+      el.className = 'slot ' + (s.taken ? 'taken' : 'free');
+      el.innerHTML = '<div class="time">' + t + '</div>' +
+        (s.taken
+          ? '<div class="status">Зает</div><div class="taken-name">' + s.name + '</div>'
+          : '<div class="status">+ Свободен</div>');
+      if (!s.taken) {
+        el.addEventListener('click', function () { openModal(t); });
+      }
+      grid.appendChild(el);
+    });
+    document.getElementById('taken-count').textContent = takenCount + ' заети';
+    document.getElementById('free-count').textContent = (times.length - takenCount) + ' свободни';
+  }
+
+  function changeDay(dir) {
+    var next = currentDayIdx + dir;
+    if (next < 0 || next >= days.length) {
+      toast('Демо — ограничено до примерни дни');
+      return;
+    }
+    loadDay(next);
+  }
+  function goToday() { loadDay(1); }
+
+  var activeSlotTime = null;
+  function openModal(time) {
+    activeSlotTime = time;
+    document.getElementById('modal-time').textContent = time + ' · 3D Стенд';
+    document.getElementById('f-name').value = '';
+    document.getElementById('f-phone').value = '';
+    document.getElementById('f-car').value = '';
+    document.getElementById('modal-overlay').classList.add('show');
+  }
+  function closeModal() {
+    document.getElementById('modal-overlay').classList.remove('show');
+  }
+  function confirmBooking() {
+    var name = document.getElementById('f-name').value.trim();
+    if (!name) { toast('Моля, въведете име'); return; }
+    slotState[activeSlotTime] = { taken: true, name: name };
+    renderSlots();
+    closeModal();
+    toast('Демо — часът е "запазен" само визуално');
+  }
+
+  function toast(msg) {
+    var t = document.getElementById('toast');
+    t.textContent = msg;
+    t.classList.add('show');
+    clearTimeout(window._toastTimer);
+    window._toastTimer = setTimeout(function () { t.classList.remove('show'); }, 2600);
+  }
+
+  document.getElementById('view-day').addEventListener('click', function () {
+    this.classList.add('active');
+    document.getElementById('view-week').classList.remove('active');
+  });
+
+  loadDay(1);
+</script>
+
+</body>
+</html>

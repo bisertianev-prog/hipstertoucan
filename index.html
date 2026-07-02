@@ -46,7 +46,18 @@
     },
     "areaServed": ["Пловдив", "България", "Bulgaria"],
     "priceRange": "$$",
-    "sameAs": []
+    "sameAs": [],
+    "hasOfferCatalog": {
+      "@type": "OfferCatalog",
+      "name": "Услуги",
+      "itemListElement": [
+        { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Изработка на нови сайтове" } },
+        { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "PWA приложения (Progressive Web Apps)" } },
+        { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Обновяване и редизайн на сайтове" } },
+        { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "SEO оптимизация" } },
+        { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Хостинг и домейн настройка" } }
+      ]
+    }
   }
   </script>
 </head>
@@ -109,40 +120,55 @@
   <!-- SERVICES DETAIL -->
   <section class="services-wrap">
     <h2 class="section-heading">Какво правим</h2>
-    <div class="services-detail-grid">
-
-      <div class="service-card accent">
-        <div class="service-card-icon"><i class="ti ti-world" aria-hidden="true"></i></div>
-        <h3>Нови сайтове</h3>
-        <p>Изработка на статични и динамични сайтове от нулата — от прост presentation сайт до платформа с администраторски панел, по мярка на бизнеса ви.</p>
-      </div>
-
-      <div class="service-card green">
-        <div class="service-card-icon"><i class="ti ti-device-mobile" aria-hidden="true"></i></div>
-        <h3>PWA приложения</h3>
-        <p>PWA (Progressive Web App) е сайт, който се държи като истинско приложение — инсталира се на телефон или компютър, работи офлайн, изпраща push известия и се интегрира с операционната система, без да минава през App Store или Google Play.</p>
-      </div>
-
-      <div class="service-card green">
-        <div class="service-card-icon"><i class="ti ti-refresh" aria-hidden="true"></i></div>
-        <h3>Обновяване</h3>
-        <p>Редизайн и модернизация на остарели сайтове — нов, съвременен дизайн, по-бърза скорост и коректно поведение на мобилни устройства.</p>
-      </div>
-
-      <div class="service-card">
-        <div class="service-card-icon"><i class="ti ti-search" aria-hidden="true"></i></div>
-        <h3>SEO оптимизация</h3>
-        <p>Подобряване на видимостта в Google — мета данни, structured data, sitemap, скорост на зареждане и техническо SEO, за да ви намират реални клиенти.</p>
-      </div>
-
-      <div class="service-card">
-        <div class="service-card-icon"><i class="ti ti-server" aria-hidden="true"></i></div>
-        <h3>Хостинг &amp; домейн</h3>
-        <p>Съдействие при избор и настройка на домейн име и хостинг, вкл. Cloudflare, SSL сертификати и имейл настройки — без технически главоболия за вас.</p>
-      </div>
-
-    </div>
   </section>
+
+  <div class="carousel-section">
+    <div class="carousel-wrap">
+      <button class="carousel-arrow carousel-arrow--left" id="services-prev" aria-label="Предишна услуга">
+        <i class="ti ti-chevron-left" aria-hidden="true"></i>
+      </button>
+
+      <div class="carousel-track" id="services-track">
+
+        <div class="service-card accent">
+          <div class="service-card-icon"><i class="ti ti-world" aria-hidden="true"></i></div>
+          <h3>Нови сайтове</h3>
+          <p>Изработка на статични и динамични сайтове от нулата — от прост presentation сайт до платформа с администраторски панел, по мярка на бизнеса ви.</p>
+        </div>
+
+        <div class="service-card green service-card--featured">
+          <div class="service-card-icon"><i class="ti ti-device-mobile" aria-hidden="true"></i></div>
+          <h3>PWA приложения</h3>
+          <p>PWA (Progressive Web App) е сайт, който се държи като истинско приложение — инсталира се на телефон или компютър, работи офлайн, изпраща push известия и се интегрира с операционната система, без да минава през App Store или Google Play.</p>
+        </div>
+
+        <div class="service-card green">
+          <div class="service-card-icon"><i class="ti ti-refresh" aria-hidden="true"></i></div>
+          <h3>Обновяване</h3>
+          <p>Редизайн и модернизация на остарели сайтове — нов, съвременен дизайн, по-бърза скорост и коректно поведение на мобилни устройства.</p>
+        </div>
+
+        <div class="service-card">
+          <div class="service-card-icon"><i class="ti ti-search" aria-hidden="true"></i></div>
+          <h3>SEO оптимизация</h3>
+          <p>Подобряване на видимостта в Google — мета данни, structured data, sitemap, скорост на зареждане и техническо SEO, за да ви намират реални клиенти.</p>
+        </div>
+
+        <div class="service-card">
+          <div class="service-card-icon"><i class="ti ti-server" aria-hidden="true"></i></div>
+          <h3>Хостинг &amp; домейн</h3>
+          <p>Съдействие при избор и настройка на домейн име и хостинг, вкл. Cloudflare, SSL сертификати и имейл настройки — без технически главоболия за вас.</p>
+        </div>
+
+      </div>
+
+      <button class="carousel-arrow carousel-arrow--right" id="services-next" aria-label="Следваща услуга">
+        <i class="ti ti-chevron-right" aria-hidden="true"></i>
+      </button>
+    </div>
+
+    <div class="carousel-dots" id="services-dots"></div>
+  </div>
 
   <!-- CONTACT FORM -->
   <section class="contact-wrap" id="contact">
@@ -189,6 +215,85 @@
   <footer>
     © 2026 <span>HipsterToucan</span> · Направено с характер
   </footer>
+
+  <script>
+  (function () {
+    function initCarousel(trackId, prevId, nextId, dotsId) {
+      var track = document.getElementById(trackId);
+      if (!track) return;
+      var cards = Array.from(track.children);
+      var prevBtn = document.getElementById(prevId);
+      var nextBtn = document.getElementById(nextId);
+      var dotsWrap = document.getElementById(dotsId);
+
+      cards.forEach((_, i) => {
+        const dot = document.createElement('button');
+        dot.setAttribute('aria-label', 'Към елемент ' + (i + 1));
+        dot.addEventListener('click', () => {
+          cards[i].scrollIntoView({ behavior: 'smooth', inline: 'center', block: 'nearest' });
+        });
+        dotsWrap.appendChild(dot);
+      });
+      var dots = Array.from(dotsWrap.children);
+
+      function update() {
+        var trackRect = track.getBoundingClientRect();
+        var center = trackRect.left + trackRect.width / 2;
+        var closestIdx = 0, closestDist = Infinity;
+
+        cards.forEach((card, i) => {
+          var r = card.getBoundingClientRect();
+          var cardCenter = r.left + r.width / 2;
+          var dist = Math.abs(cardCenter - center);
+          var norm = Math.min(dist / (trackRect.width / 2), 1);
+          card.style.transform = 'scale(' + (1 - norm * 0.08).toFixed(3) + ')';
+          card.style.opacity = (1 - norm * 0.35).toFixed(3);
+          if (dist < closestDist) { closestDist = dist; closestIdx = i; }
+        });
+
+        dots.forEach((d, i) => d.classList.toggle('active', i === closestIdx));
+        prevBtn.disabled = track.scrollLeft <= 4;
+        nextBtn.disabled = track.scrollLeft >= track.scrollWidth - track.clientWidth - 4;
+      }
+
+      var ticking = false;
+      track.addEventListener('scroll', () => {
+        if (!ticking) {
+          requestAnimationFrame(() => { update(); ticking = false; });
+          ticking = true;
+        }
+      });
+
+      function scrollByCard(dir) {
+        var style = getComputedStyle(track);
+        var gap = parseFloat(style.columnGap || style.gap || 20);
+        var amount = cards[0].getBoundingClientRect().width + gap;
+        track.scrollBy({ left: dir * amount, behavior: 'smooth' });
+      }
+      prevBtn.addEventListener('click', () => scrollByCard(-1));
+      nextBtn.addEventListener('click', () => scrollByCard(1));
+
+      var isDown = false, startX = 0, scrollStart = 0;
+      track.addEventListener('mousedown', (e) => {
+        isDown = true;
+        track.classList.add('dragging');
+        startX = e.pageX;
+        scrollStart = track.scrollLeft;
+      });
+      window.addEventListener('mouseup', () => { isDown = false; track.classList.remove('dragging'); });
+      window.addEventListener('mousemove', (e) => {
+        if (!isDown) return;
+        e.preventDefault();
+        track.scrollLeft = scrollStart - (e.pageX - startX);
+      });
+
+      window.addEventListener('resize', update);
+      update();
+    }
+
+    initCarousel('services-track', 'services-prev', 'services-next', 'services-dots');
+  })();
+  </script>
 
 </body>
 </html>

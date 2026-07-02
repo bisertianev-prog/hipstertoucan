@@ -389,34 +389,18 @@ nav {
 .services-wrap {
   max-width: 760px;
   margin: 0 auto;
-  padding: 0 2rem 4rem;
+  padding: 0 2rem 1.5rem;
 }
 
-.services-detail-grid {
-  display: grid;
-  grid-template-columns: 1fr 1.15fr 1fr;
-  grid-template-rows: auto auto;
-  grid-template-areas:
-    "sites   pwa   update"
-    "seo     pwa   hosting";
-  gap: 16px;
-}
-
-.service-slot {
-  display: flex;
-}
-
-.service-slot .service-card {
-  width: 100%;
+.carousel-track .service-card {
+  scroll-snap-align: center;
+  flex: 0 0 auto;
+  width: min(300px, 80vw);
 }
 
 .service-card--featured {
   background: linear-gradient(165deg, rgba(26,171,116,0.14), var(--card-bg) 60%);
   border-color: rgba(26,171,116,0.35);
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  padding: 2rem 1.75rem;
 }
 
 .service-card--featured .service-card-icon {
@@ -478,7 +462,7 @@ nav {
   left: 50%;
   transform: translateX(-50%);
   padding: 0 max(2rem, calc((100vw - 1100px) / 2 + 2rem));
-  margin-bottom: 1rem;
+  margin-bottom: 2rem;
 }
 
 .carousel-wrap { position: relative; }
@@ -579,8 +563,6 @@ footer span { color: var(--orange); }
 /* ── RESPONSIVE ── */
 @media (max-width: 560px) {
   .form-grid { grid-template-columns: 1fr; }
-  .services-detail-grid { grid-template-columns: 1fr; grid-template-areas: none; }
-  .services-detail-grid .service-slot { grid-area: auto !important; }
   .service-card--featured { padding: 1.5rem; }
   nav { padding: 0 1rem; }
   .hero, .contact-wrap, .projects-wrap { padding-left: 1rem; padding-right: 1rem; }

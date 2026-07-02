@@ -394,9 +394,40 @@ nav {
 
 .services-detail-grid {
   display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 14px;
+  grid-template-columns: 1fr 1.15fr 1fr;
+  grid-template-rows: auto auto;
+  grid-template-areas:
+    "sites   pwa   update"
+    "seo     pwa   hosting";
+  gap: 16px;
 }
+
+.service-slot {
+  display: flex;
+}
+
+.service-slot .service-card {
+  width: 100%;
+}
+
+.service-card--featured {
+  background: linear-gradient(165deg, rgba(26,171,116,0.14), var(--card-bg) 60%);
+  border-color: rgba(26,171,116,0.35);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 2rem 1.75rem;
+}
+
+.service-card--featured .service-card-icon {
+  width: 48px;
+  height: 48px;
+  font-size: 22px;
+  margin-bottom: 16px;
+}
+
+.service-card--featured h3 { font-size: 19px; margin-bottom: 10px; }
+.service-card--featured p { font-size: 14.5px; }
 
 .service-card {
   background: var(--card-bg);
@@ -548,7 +579,9 @@ footer span { color: var(--orange); }
 /* ── RESPONSIVE ── */
 @media (max-width: 560px) {
   .form-grid { grid-template-columns: 1fr; }
-  .services-detail-grid { grid-template-columns: 1fr; }
+  .services-detail-grid { grid-template-columns: 1fr; grid-template-areas: none; }
+  .services-detail-grid .service-slot { grid-area: auto !important; }
+  .service-card--featured { padding: 1.5rem; }
   nav { padding: 0 1rem; }
   .hero, .contact-wrap, .projects-wrap { padding-left: 1rem; padding-right: 1rem; }
 }

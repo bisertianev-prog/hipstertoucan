@@ -62,76 +62,90 @@
       Има готови и работещи, има и в процес на разработка. Ценим нашите клиенти и личното им пространство — при интерес винаги може да дръпнем леко завесата.
     </p>
 
-    <div class="projects-grid">
+    <div class="carousel-section">
+      <div class="carousel-wrap">
+        <button class="carousel-arrow carousel-arrow--left" id="carousel-prev" aria-label="Предишен проект">
+          <i class="ti ti-chevron-left" aria-hidden="true"></i>
+        </button>
 
-      <!-- DragonService -->
-      <div class="project-card project-card--featured">
-        <div class="project-card-header">
-          <span class="badge badge-done">Готов</span>
-          <div class="project-tags">
-            <span class="project-tag">Статичен сайт</span>
-            <span class="project-tag">SEO</span>
+        <div class="carousel-track" id="carousel-track">
+
+          <!-- DragonService -->
+          <div class="project-card project-card--featured">
+            <div class="project-card-header">
+              <span class="badge badge-done">Готов</span>
+              <div class="project-tags">
+                <span class="project-tag">Статичен сайт</span>
+                <span class="project-tag">SEO</span>
+              </div>
+            </div>
+            <h3>DragonService<span class="project-domain">.eu</span></h3>
+            <p>Фирмен сайт с модерен дизайн, мобилна оптимизация и SEO структура. Изграден от нулата с акцент върху бързина и четимост.</p>
+            <a href="https://dragonservice.eu" target="_blank" rel="noopener" class="project-link">
+              <i class="ti ti-external-link" aria-hidden="true"></i>
+              dragonservice.eu
+            </a>
           </div>
-        </div>
-        <h3>DragonService<span class="project-domain">.eu</span></h3>
-        <p>Фирмен сайт с модерен дизайн, мобилна оптимизация и SEO структура. Изграден от нулата с акцент върху бързина и четимост.</p>
-        <a href="https://dragonservice.eu" target="_blank" rel="noopener" class="project-link">
-          <i class="ti ti-external-link" aria-hidden="true"></i>
-          dragonservice.eu
-        </a>
-      </div>
 
-      <!-- PWA 3D Стенд -->
-      <div class="project-card project-card--featured">
-        <div class="project-card-image">
-          <img src="images/scheduler-screenshot.jpg" alt="PWA график за 3D Стенд — интерфейс за резервации" loading="lazy">
-        </div>
-        <div class="project-card-header">
-          <span class="badge badge-done">Готов</span>
-          <div class="project-tags">
-            <span class="project-tag project-tag--green">PWA</span>
-            <span class="project-tag project-tag--green">3D</span>
+          <!-- PWA 3D Стенд -->
+          <div class="project-card project-card--featured">
+            <div class="project-card-image">
+              <img src="images/scheduler-screenshot.jpg" alt="PWA график за 3D Стенд — интерфейс за резервации" loading="lazy">
+            </div>
+            <div class="project-card-header">
+              <span class="badge badge-done">Готов</span>
+              <div class="project-tags">
+                <span class="project-tag project-tag--green">PWA</span>
+                <span class="project-tag project-tag--green">3D</span>
+              </div>
+            </div>
+            <h3>3D Стенд<span class="project-domain"> · PWA</span></h3>
+            <p>Progressive Web App за интерактивно конфигуриране и запазване на приетите поръчки за 3D СТЕНД в автосервиз.</p>
+            <a href="https://bisertianev-prog.github.io/servis-scheduler/" target="_blank" rel="noopener" class="project-link">
+              <i class="ti ti-external-link" aria-hidden="true"></i>
+              Виж на живо
+            </a>
           </div>
-        </div>
-        <h3>3D Стенд<span class="project-domain"> · PWA</span></h3>
-        <p>Progressive Web App за интерактивно конфигуриране и запазване на приетите поръчки за 3D СТЕНД в автосервиз.</p>
-        <a href="https://bisertianev-prog.github.io/servis-scheduler/" target="_blank" rel="noopener" class="project-link">
-          <i class="ti ti-external-link" aria-hidden="true"></i>
-          Виж на живо
-        </a>
-      </div>
 
-      <!-- Домоуправител PWA -->
-      <div class="project-card project-card--featured">
-        <div class="project-card-header">
-          <span class="badge badge-done">Готов</span>
-          <div class="project-tags">
-            <span class="project-tag project-tag--green">PWA</span>
-            <span class="project-tag project-tag--green">Supabase</span>
+          <!-- Домоуправител PWA -->
+          <div class="project-card project-card--featured">
+            <div class="project-card-header">
+              <span class="badge badge-done">Готов</span>
+              <div class="project-tags">
+                <span class="project-tag project-tag--green">PWA</span>
+                <span class="project-tag project-tag--green">Supabase</span>
+              </div>
+            </div>
+            <h3>Домоуправител<span class="project-domain"> · PWA</span></h3>
+            <p>Дигитално приложение за управление на жилищен блок — месечни такси, разпределение по апартаменти, плащания и напомняния, книга на етажната собственост, извънредни разходи и печат на разписки към Bluetooth термопринтер.</p>
+            <a href="demo/domoupravitel/" target="_blank" rel="noopener" class="project-link">
+              <i class="ti ti-external-link" aria-hidden="true"></i>
+              Виж демо (примерни данни)
+            </a>
           </div>
+
+          <!-- Placeholder 3 -->
+          <div class="project-card">
+            <span class="badge badge-wip">В процес</span>
+            <h3>Динамичен сайт</h3>
+            <p>Динамичен сайт с персонализиран бекенд и административен панел.</p>
+          </div>
+
+          <!-- Placeholder 4 -->
+          <div class="project-card">
+            <span class="badge badge-wip">В процес</span>
+            <h3>Оптимизация</h3>
+            <p>Пълна оптимизация на скорост и SEO за е-магазин.</p>
+          </div>
+
         </div>
-        <h3>Домоуправител<span class="project-domain"> · PWA</span></h3>
-        <p>Дигитално приложение за управление на жилищен блок — месечни такси, разпределение по апартаменти, плащания и напомняния, книга на етажната собственост, извънредни разходи и печат на разписки към Bluetooth термопринтер.</p>
-        <a href="demo/domoupravitel/" target="_blank" rel="noopener" class="project-link">
-          <i class="ti ti-external-link" aria-hidden="true"></i>
-          Виж демо (примерни данни)
-        </a>
+
+        <button class="carousel-arrow carousel-arrow--right" id="carousel-next" aria-label="Следващ проект">
+          <i class="ti ti-chevron-right" aria-hidden="true"></i>
+        </button>
       </div>
 
-      <!-- Placeholder 3 -->
-      <div class="project-card">
-        <span class="badge badge-wip">В процес</span>
-        <h3>Динамичен сайт</h3>
-        <p>Динамичен сайт с персонализиран бекенд и административен панел.</p>
-      </div>
-
-      <!-- Placeholder 4 -->
-      <div class="project-card">
-        <span class="badge badge-wip">В процес</span>
-        <h3>Оптимизация</h3>
-        <p>Пълна оптимизация на скорост и SEO за е-магазин.</p>
-      </div>
-
+      <div class="carousel-dots" id="carousel-dots"></div>
     </div>
 
     <hr class="divider" />
@@ -149,6 +163,81 @@
   <footer>
     © 2026 <span>HipsterToucan</span> · Направено с характер
   </footer>
+
+  <script>
+  (function () {
+    const track = document.getElementById('carousel-track');
+    const cards = Array.from(track.children);
+    const prevBtn = document.getElementById('carousel-prev');
+    const nextBtn = document.getElementById('carousel-next');
+    const dotsWrap = document.getElementById('carousel-dots');
+
+    cards.forEach((_, i) => {
+      const dot = document.createElement('button');
+      dot.setAttribute('aria-label', 'Към проект ' + (i + 1));
+      dot.addEventListener('click', () => {
+        cards[i].scrollIntoView({ behavior: 'smooth', inline: 'center', block: 'nearest' });
+      });
+      dotsWrap.appendChild(dot);
+    });
+    const dots = Array.from(dotsWrap.children);
+
+    function update() {
+      const trackRect = track.getBoundingClientRect();
+      const center = trackRect.left + trackRect.width / 2;
+      let closestIdx = 0, closestDist = Infinity;
+
+      cards.forEach((card, i) => {
+        const r = card.getBoundingClientRect();
+        const cardCenter = r.left + r.width / 2;
+        const dist = Math.abs(cardCenter - center);
+        const norm = Math.min(dist / (trackRect.width / 2), 1);
+        card.style.transform = 'scale(' + (1 - norm * 0.08).toFixed(3) + ')';
+        card.style.opacity = (1 - norm * 0.35).toFixed(3);
+        if (dist < closestDist) { closestDist = dist; closestIdx = i; }
+      });
+
+      dots.forEach((d, i) => d.classList.toggle('active', i === closestIdx));
+      prevBtn.disabled = track.scrollLeft <= 4;
+      nextBtn.disabled = track.scrollLeft >= track.scrollWidth - track.clientWidth - 4;
+    }
+
+    let ticking = false;
+    track.addEventListener('scroll', () => {
+      if (!ticking) {
+        requestAnimationFrame(() => { update(); ticking = false; });
+        ticking = true;
+      }
+    });
+
+    function scrollByCard(dir) {
+      const style = getComputedStyle(track);
+      const gap = parseFloat(style.columnGap || style.gap || 20);
+      const amount = cards[0].getBoundingClientRect().width + gap;
+      track.scrollBy({ left: dir * amount, behavior: 'smooth' });
+    }
+    prevBtn.addEventListener('click', () => scrollByCard(-1));
+    nextBtn.addEventListener('click', () => scrollByCard(1));
+
+    // Drag-to-scroll with mouse (desktop, non-touch)
+    let isDown = false, startX = 0, scrollStart = 0;
+    track.addEventListener('mousedown', (e) => {
+      isDown = true;
+      track.classList.add('dragging');
+      startX = e.pageX;
+      scrollStart = track.scrollLeft;
+    });
+    window.addEventListener('mouseup', () => { isDown = false; track.classList.remove('dragging'); });
+    window.addEventListener('mousemove', (e) => {
+      if (!isDown) return;
+      e.preventDefault();
+      track.scrollLeft = scrollStart - (e.pageX - startX);
+    });
+
+    window.addEventListener('resize', update);
+    update();
+  })();
+  </script>
 
 </body>
 </html>

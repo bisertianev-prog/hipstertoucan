@@ -3,12 +3,63 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description" content="Статични и динамични сайтове по поръчка. Обновяване, оптимизация, хостинг и домейн." />
-  <title>HipsterToucan · Начало</title>
+  <meta name="description" content="HipsterToucan — уеб студио в Пловдив. Изработка на статични и динамични сайтове по поръчка, обновяване, SEO оптимизация, хостинг и домейн." />
+  <title>HipsterToucan — Изработка на сайтове в Пловдив | Уеб студио</title>
+  <link rel="canonical" href="https://hipstertoucan.com/" />
   <link rel="icon" type="image/svg+xml" href="favicon.svg" />
   <link rel="stylesheet" href="style.css" />
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/tabler-icons.min.css" />
   <script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://hipstertoucan.com/" />
+  <meta property="og:title" content="HipsterToucan — Изработка на сайтове в Пловдив" />
+  <meta property="og:description" content="Статични и динамични сайтове по поръчка, обновяване, SEO оптимизация, хостинг и домейн. Уеб студио в Пловдив." />
+  <meta property="og:image" content="https://hipstertoucan.com/images/og-image.jpg" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+  <meta property="og:locale" content="bg_BG" />
+  <meta property="og:site_name" content="HipsterToucan" />
+
+  <!-- Twitter -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="HipsterToucan — Изработка на сайтове в Пловдив" />
+  <meta name="twitter:description" content="Статични и динамични сайтове по поръчка, обновяване, SEO оптимизация, хостинг и домейн." />
+  <meta name="twitter:image" content="https://hipstertoucan.com/images/og-image.jpg" />
+
+  <!-- Structured Data — LocalBusiness -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "ProfessionalService",
+    "@id": "https://hipstertoucan.com/#business",
+    "name": "HipsterToucan",
+    "description": "Уеб студио в Пловдив — изработка на статични и динамични сайтове по поръчка, обновяване, SEO оптимизация, хостинг и домейн.",
+    "url": "https://hipstertoucan.com",
+    "telephone": "+359899324727",
+    "email": "bisertianev@gmail.com",
+    "address": {
+      "@type": "PostalAddress",
+      "addressLocality": "Пловдив",
+      "addressCountry": "BG"
+    },
+    "areaServed": ["Пловдив", "България", "Bulgaria"],
+    "priceRange": "$$",
+    "sameAs": [],
+    "hasOfferCatalog": {
+      "@type": "OfferCatalog",
+      "name": "Услуги",
+      "itemListElement": [
+        { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Изработка на нови сайтове" } },
+        { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "PWA приложения (Progressive Web Apps)" } },
+        { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Обновяване и редизайн на сайтове" } },
+        { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "SEO оптимизация" } },
+        { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Хостинг и домейн настройка" } }
+      ]
+    }
+  }
+  </script>
 </head>
 <body>
 
@@ -59,14 +110,53 @@
     </p>
     <div class="services">
       <span class="tag accent">Нови сайтове</span>
+      <span class="tag green">PWA приложения</span>
       <span class="tag green">Обновяване</span>
       <span class="tag">Оптимизация</span>
       <span class="tag">Хостинг &amp; домейн</span>
     </div>
   </section>
 
+  <!-- SERVICES DETAIL -->
+  <section class="services-wrap">
+    <h2 class="section-heading">Какво правим</h2>
+    <div class="services-detail-grid">
+
+      <div class="service-card accent">
+        <div class="service-card-icon"><i class="ti ti-world" aria-hidden="true"></i></div>
+        <h3>Нови сайтове</h3>
+        <p>Изработка на статични и динамични сайтове от нулата — от прост presentation сайт до платформа с администраторски панел, по мярка на бизнеса ви.</p>
+      </div>
+
+      <div class="service-card green">
+        <div class="service-card-icon"><i class="ti ti-device-mobile" aria-hidden="true"></i></div>
+        <h3>PWA приложения</h3>
+        <p>PWA (Progressive Web App) е сайт, който се държи като истинско приложение — инсталира се на телефон или компютър, работи офлайн, изпраща push известия и се интегрира с операционната система, без да минава през App Store или Google Play.</p>
+      </div>
+
+      <div class="service-card green">
+        <div class="service-card-icon"><i class="ti ti-refresh" aria-hidden="true"></i></div>
+        <h3>Обновяване</h3>
+        <p>Редизайн и модернизация на остарели сайтове — нов, съвременен дизайн, по-бърза скорост и коректно поведение на мобилни устройства.</p>
+      </div>
+
+      <div class="service-card">
+        <div class="service-card-icon"><i class="ti ti-search" aria-hidden="true"></i></div>
+        <h3>SEO оптимизация</h3>
+        <p>Подобряване на видимостта в Google — мета данни, structured data, sitemap, скорост на зареждане и техническо SEO, за да ви намират реални клиенти.</p>
+      </div>
+
+      <div class="service-card">
+        <div class="service-card-icon"><i class="ti ti-server" aria-hidden="true"></i></div>
+        <h3>Хостинг &amp; домейн</h3>
+        <p>Съдействие при избор и настройка на домейн име и хостинг, вкл. Cloudflare, SSL сертификати и имейл настройки — без технически главоболия за вас.</p>
+      </div>
+
+    </div>
+  </section>
+
   <!-- CONTACT FORM -->
-  <section class="contact-wrap">
+  <section class="contact-wrap" id="contact">
     <h2 class="section-heading">Свържете се</h2>
     <div class="contact-card">
       <form action="https://formspree.io/f/mgojwzqe" method="POST">

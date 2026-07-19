@@ -587,3 +587,32 @@ footer span { color: var(--orange); }
 @media (prefers-reduced-motion: reduce) {
   * { transition: none !important; animation: none !important; }
 }
+
+/* ── КОНТАКТНА ФОРМА: honeypot + статус ── */
+
+/* Скрито поле-капан за ботове. Не се използва display:none —
+   част от ботовете нарочно пропускат такива полета. */
+.hp-field {
+  position: absolute !important;
+  left: -9999px !important;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.form-status {
+  margin-top: 1rem;
+  font-size: 0.95rem;
+  font-weight: 500;
+  min-height: 1.4em;
+}
+
+.form-status.ok  { color: var(--green); }
+.form-status.err { color: var(--orange); }
+
+form button[type="submit"]:disabled {
+  opacity: 0.6;
+  cursor: wait;
+}

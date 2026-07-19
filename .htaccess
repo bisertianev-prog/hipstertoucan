@@ -1,0 +1,53 @@
+# HipsterToucan — /home/hipstert/public_html/.htaccess
+
+# ── Кодировка ──
+AddDefaultCharset UTF-8
+
+# ── Без листване на директории ──
+Options -Indexes
+
+# ── Забрана за достъп до чувствителни файлове ──
+<FilesMatch "^\.(git|env|htaccess|htpasswd)">
+    Require all denied
+</FilesMatch>
+
+<FilesMatch "\.(md|yml|yaml|json|log|bak|sql|ini)$">
+    Require all denied
+</FilesMatch>
+
+# Защита на .git директорията, ако някога попадне тук
+RedirectMatch 404 /\.git
+
+# ── Хедъри за сигурност ──
+<IfModule mod_headers.c>
+    Header always set X-Content-Type-Options "nosniff"
+    Header always set X-Frame-Options "SAMEORIGIN"
+    Header always set Referrer-Policy "strict-origin-when-cross-origin"
+    Header always set Permissions-Policy "geolocation=(), microphone=(), camera=()"
+</IfModule>
+
+# ── Кеширане на статични файлове ──
+<IfModule mod_expires.c>
+    ExpiresActive On
+    ExpiresByType image/jpeg        "access plus 1 year"
+    ExpiresByType image/png         "access plus 1 year"
+    ExpiresByType image/svg+xml     "access plus 1 year"
+    ExpiresByType image/webp        "access plus 1 year"
+    ExpiresByType text/css          "access plus 1 month"
+    ExpiresByType application/javascript "access plus 1 month"
+    ExpiresByType text/html         "access plus 0 seconds"
+</IfModule>
+
+# ── Компресия ──
+<IfModule mod_deflate.c>
+    AddOutputFilterByType DEFLATE text/html text/css text/plain text/xml
+    AddOutputFilterByType DEFLATE application/javascript application/json
+    AddOutputFilterByType DEFLATE image/svg+xml
+</IfModule>
+
+# ── Персонализирани страници за грешки (по желание) ──
+# ErrorDocument 404 /404.html
+
+# ЗАБЕЛЕЖКА: НЕ добавяй тук пренасочване http→https.
+# Това вече се прави от Cloudflare (Always Use HTTPS).
+# Двойното пренасочване води до ERR_TOO_MANY_REDIRECTS.

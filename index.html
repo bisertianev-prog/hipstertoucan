@@ -16,7 +16,7 @@
   <meta property="og:url" content="https://hipstertoucan.com/" />
   <meta property="og:title" content="HipsterToucan — Изработка на сайтове в Пловдив" />
   <meta property="og:description" content="Статични и динамични сайтове по поръчка, обновяване, SEO оптимизация, хостинг и домейн. Уеб студио в Пловдив." />
-  <meta property="og:image" content="https://hipstertoucan.com/images/og-image.jpg" />
+  <meta property="og:image" content="https://hipstertoucan.com/og-image.jpg" />
   <meta property="og:image:width" content="1200" />
   <meta property="og:image:height" content="630" />
   <meta property="og:locale" content="bg_BG" />
@@ -26,7 +26,7 @@
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:title" content="HipsterToucan — Изработка на сайтове в Пловдив" />
   <meta name="twitter:description" content="Статични и динамични сайтове по поръчка, обновяване, SEO оптимизация, хостинг и домейн." />
-  <meta name="twitter:image" content="https://hipstertoucan.com/images/og-image.jpg" />
+  <meta name="twitter:image" content="https://hipstertoucan.com/og-image.jpg" />
 
   <!-- Structured Data — LocalBusiness -->
   <script type="application/ld+json">
@@ -160,7 +160,7 @@
   <section class="contact-wrap" id="contact">
     <h2 class="section-heading">Свържете се</h2>
     <div class="contact-card">
-      <form action="https://formspree.io/f/mgojwzqe" method="POST">
+      <form id="contact-form" action="contact.php" method="POST" novalidate>
         <div class="form-grid">
           <div class="field">
             <label for="name">Вашето име *</label>
@@ -187,12 +187,17 @@
             <label for="message">Съобщение *</label>
             <textarea id="message" name="message" placeholder="Разкажете ни за проекта си…" required></textarea>
           </div>
+          <div class="field full hp-field" aria-hidden="true">
+            <label for="website">Не попълвайте това поле</label>
+            <input type="text" id="website" name="website" tabindex="-1" autocomplete="off" />
+          </div>
         </div>
         <div class="cf-turnstile" data-sitekey="0x4AAAAAADomp2wblz648HUA" data-theme="light"></div>
         <button type="submit" class="btn-primary">
           <i class="ti ti-send" aria-hidden="true"></i>
           Изпратете
         </button>
+        <p id="form-status" class="form-status" role="status" aria-live="polite"></p>
       </form>
     </div>
   </section>
@@ -237,6 +242,57 @@
     if (hoverCapable) {
       row.addEventListener('mouseleave', collapseAll);
     }
+  })();
+  </script>
+
+  <script>
+  // ---- Контактна форма: изпращане без презареждане ----
+  (function () {
+    var form = document.getElementById('contact-form');
+    if (!form) return;
+    var status = document.getElementById('form-status');
+    var btn = form.querySelector('button[type="submit"]');
+    var btnHTML = btn ? btn.innerHTML : '';
+
+    function show(msg, ok) {
+      status.textContent = msg;
+      status.className = 'form-status ' + (ok ? 'ok' : 'err');
+    }
+
+    form.addEventListener('submit', function (e) {
+      e.preventDefault();
+
+      if (!form.checkValidity()) {
+        show('Моля, попълнете задължителните полета.', false);
+        form.reportValidity();
+        return;
+      }
+
+      if (btn) { btn.disabled = true; btn.textContent = 'Изпращане…'; }
+      show('', true);
+
+      fetch(form.action, {
+        method: 'POST',
+        body: new FormData(form),
+        headers: { 'Accept': 'application/json' }
+      })
+      .then(function (r) { return r.json().catch(function () { return { ok: false, msg: 'Неочакван отговор от сървъра.' }; }); })
+      .then(function (data) {
+        show(data.msg || (data.ok ? 'Изпратено.' : 'Възникна грешка.'), !!data.ok);
+        if (data.ok) {
+          form.reset();
+          if (window.turnstile) { try { window.turnstile.reset(); } catch (err) {} }
+        } else if (window.turnstile) {
+          try { window.turnstile.reset(); } catch (err) {}
+        }
+      })
+      .catch(function () {
+        show('Няма връзка със сървъра. Моля, опитайте отново или пишете на info@hipstertoucan.com', false);
+      })
+      .finally(function () {
+        if (btn) { btn.disabled = false; btn.innerHTML = btnHTML; }
+      });
+    });
   })();
   </script>
 

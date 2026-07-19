@@ -1,0 +1,6 @@
+.env
+.user.ini
+ht-config.php
+node_modules/
+.DS_Store
+Thumbs.db

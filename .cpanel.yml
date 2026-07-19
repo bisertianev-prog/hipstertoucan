@@ -1,0 +1,8 @@
+---
+deployment:
+  tasks:
+    - export DEPLOYPATH=/home/hipstert/public_html
+    - /usr/bin/rsync -a
+        --exclude='.git' --exclude='.gitignore' --exclude='.cpanel.yml'
+        --exclude='.env' --exclude='.user.ini'
+        ./ $DEPLOYPATH/

@@ -6,6 +6,9 @@ AddDefaultCharset UTF-8
 # ── Без листване на директории ──
 Options -Indexes
 
+# ── Пренасочване на безразширни/стари адреси към реалните страници ──
+RedirectMatch 301 ^/projects/?$ /projects.html
+
 # ── Забрана за достъп до чувствителни файлове ──
 <FilesMatch "^\.(git|env|htaccess|htpasswd)">
     Require all denied
